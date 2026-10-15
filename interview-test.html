@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тестовое задание для тестировщика</title>
+    <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=2AKJ2TAcLMF215sNjerva3VqOz8UD7-1gx4_dBWD6TbhAmEN6yoGiikC1KdAUf8qvwZCjrJkOKiylSCmuGt9OAhq8FDQjsyd_ljFewE9CEiP7WaDju9h7M7kN4oHk3cp2xHtGm8F08rav4CrYVwHAfaLI3RYW-efoZVFN7t6Uq5mvb4CbRqQC54loQyCD45tGrfmC-kR0KXr72tVjHpJagsnC5dHjOHTYNoKBU00eyoZjRRRuLMOABD3efVj5u6U3bpjiBg3J5Duf68dDSbCuPdWOh1I8L2UTqHeJqb_GuR2KU-uyclRatgYNu_c1fLz1ANofvOCyWWqoI9h75qe3E40C2lljyfqlFEyRxDSwZYsWfNkXKOsMgwsOGjsS3P4gAHWr5FQkzWTfQ3MpchxdUPTiKOcBYX6kHkKQ_z6B7WiliqK86TxqLWjFrJgXJC6QqHz-hiz_3SIi-WKjU51uVG7KMm5_PwKttGtsdzsEjxVKaNMVmOfVrU4kui_1kpyjWy4yQ8Tm4niZL_b2zz9PDKnl8OkxDS3COtSfs-6YAERo5TagfeYoHrwSQdwivx0lEQQPRo6mqJDeDhMnxSyjGiJRoYRpirHmxAD4LQOYCfT8TeSzTdFFoM68e-nPQsDmQfHUvg55v97eHgYo_0iU8d2Dv9jMEkUYqFDCRHjiHg" charset="UTF-8"></script><style>
+        :root {
+            --text: #2b2b2b;
+            --muted: #6b6b6b;
+            --accent: #2f6fed;
+            --accent-soft: #eef3ff;
+            --border: #e2e2e2;
+            --bg: #fafbfc;
+            --card: #ffffff;
+            --code-bg: #f4f4f5;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            color: var(--text);
+            background: var(--bg);
+            line-height: 1.6;
+            padding: 24px 16px 64px;
+        }
+
+        .container { max-width: 860px; margin: 0 auto; }
+
+        /* Вкладки */
+        .tabs {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+        }
+
+        .tab-btn {
+            padding: 10px 20px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: var(--card);
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text);
+            cursor: pointer;
+            transition: background 0.15s, color 0.15s, border-color 0.15s;
+        }
+
+        .tab-btn:hover { background: var(--accent-soft); }
+
+        .tab-btn.active {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+        }
+
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; }
+
+        .tabs-hint {
+            display: inline-block;
+            background: var(--code-bg);
+            border: 1px dashed var(--border);
+            border-radius: 8px;
+            padding: 6px 12px;
+            font-size: 13px;
+            color: var(--muted);
+            margin-bottom: 20px;
+        }
+
+        section {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 28px 32px;
+            margin-bottom: 28px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+        }
+
+        section h2 {
+            font-size: 20px;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .badge {
+            font-size: 12px;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 20px;
+            color: #fff;
+        }
+        .badge-sql { background: #2f6fed; }
+        .badge-http { background: #0d9b7a; }
+        .badge-bug { background: #e05e5e; }
+
+        .subtitle { color: var(--muted); font-size: 14px; margin-bottom: 20px; }
+
+        h3 { font-size: 16px; margin: 24px 0 10px; color: var(--text); }
+
+        /* Схема БД */
+        .schema {
+            background: var(--accent-soft);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 24px;
+            font-size: 14px;
+        }
+
+        .schema-title { font-weight: 600; margin-bottom: 12px; font-size: 15px; }
+
+        .table {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--accent);
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 14px;
+        }
+
+        .table-name { font-weight: 700; font-family: "SF Mono", "Consolas", monospace; font-size: 14px; }
+        .table-fields {
+            margin-top: 6px;
+            font-family: "SF Mono", "Consolas", monospace;
+            font-size: 13px;
+            color: var(--muted);
+            line-height: 1.9;
+        }
+
+        .schema-note {
+            margin-top: 12px;
+            padding: 12px 14px;
+            background: #fff8e6;
+            border-left: 4px solid #e0a800;
+            border-radius: 8px;
+            font-size: 13.5px;
+        }
+
+        /* Данные в таблицах схемы */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-family: "SF Mono", "Consolas", monospace;
+            font-size: 12.5px;
+        }
+        .data-table th, .data-table td {
+            border: 1px solid var(--border);
+            padding: 5px 8px;
+            text-align: left;
+            white-space: nowrap;
+        }
+        .data-table th { background: #f0f3f8; font-weight: 600; }
+        .data-table td.null { color: #999; font-style: italic; }
+
+        /* Кнопка проверки и результат */
+        .check-row { display: flex; align-items: center; gap: 12px; margin-top: 10px; flex-wrap: wrap; }
+        .check-btn {
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .check-btn:hover { opacity: 0.92; }
+        .check-btn:disabled { background: #c5d1ea; cursor: not-allowed; }
+
+        .check-result { font-size: 13.5px; font-weight: 600; }
+        .check-result.ok { color: #0d9b7a; }
+        .check-result.err { color: #e05e5e; }
+        .check-result.pending { color: var(--muted); font-weight: 400; }
+        .check-err { color: #e05e5e; font-size: 12.5px; width: 100%; white-space: pre-wrap; }
+
+        /* Таблица результата запроса */
+        .qr-table-wrap { overflow-x: auto; margin-top: 12px; }
+        .qr-table {
+            border-collapse: collapse;
+            font-family: "SF Mono", "Consolas", monospace;
+            font-size: 12.5px;
+            min-width: 40%;
+            max-width: 100%;
+        }
+        .qr-table th, .qr-table td {
+            border: 1px solid var(--border);
+            padding: 5px 10px;
+            text-align: left;
+            white-space: nowrap;
+        }
+        .qr-table th { background: #f0f3f8; font-weight: 600; }
+        .qr-table td.null { color: #999; font-style: italic; }
+        .qr-table .qr-empty { color: var(--muted); white-space: normal; }
+
+        .engine-status { font-size: 12px; color: var(--muted); margin-bottom: 16px; }
+        .engine-status code { background: var(--code-bg); padding: 1px 5px; border-radius: 4px; }
+
+        /* SQL: подвкладки задач */
+        .sql-subtabs {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+        .sql-subtab {
+            padding: 8px 16px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--card);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text);
+            cursor: pointer;
+            transition: background 0.15s, color 0.15s, border-color 0.15s;
+        }
+        .sql-subtab:hover { background: var(--accent-soft); }
+        .sql-subtab.active {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+        }
+
+        .sql-task-view {
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 18px 20px;
+            margin-bottom: 18px;
+        }
+        .sql-task-view .task-header { margin-bottom: 8px; }
+        .sql-task-view .task-text { font-size: 14.5px; margin-bottom: 14px; }
+        .sql-editor { width: 100%; min-height: 90px; resize: vertical; }
+
+        /* Задачи */
+        .task {
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 18px 20px;
+            margin-bottom: 18px;
+        }
+
+        .task-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+
+        .task-num {
+            flex-shrink: 0;
+            width: 26px;
+            height: 26px;
+            background: var(--accent);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .task-topic {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .task p { font-size: 14.5px; }
+
+        textarea, input[type="text"].sql-answer {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-family: "SF Mono", "Consolas", monospace;
+            font-size: 13.5px;
+            background: #fff;
+            resize: vertical;
+        }
+
+        textarea { min-height: 90px; margin-top: 10px; }
+        .sql-answer { margin-top: 10px; }
+
+        /* Http */
+        .http-answer { margin-top: 10px; }
+
+        /* Форма с багами */
+        .bug-form {
+            background: var(--code-bg);
+            border: 1px dashed var(--border);
+            border-radius: 10px;
+            padding: 24px;
+            margin: 20px 0;
+        }
+
+        .bug-banner {
+            background: #fdeeee;
+            border-left: 4px solid #e05e5e;
+            padding: 12px 14px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .form-row { margin-bottom: 16px; }
+        .form-row label { display: block; font-size: 14px; margin-bottom: 6px; font-weight: 500; }
+        .form-row input, .form-row select {
+            width: 100%;
+            max-width: 420px;
+            padding: 9px 12px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        .form-row.error input { border-color: #e05e5e; }
+
+        .checkbox-row { display: flex; align-items: center; gap: 8px; font-size: 14px; }
+
+        .btn {
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            padding: 11px 22px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .btn:hover { opacity: 0.92; }
+
+        .btn:disabled {
+            background: #c5d1ea;
+            cursor: not-allowed;
+        }
+
+        /* Форма входа (стилизована под СберБизнес, значок сиреневый — намеренный баг) */
+        .login-form {
+            max-width: 420px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+        }
+
+        /* Логотип — СБЕР в сиреневом цвете вместо корпоративного зелёного (баг) */
+        .login-logo {
+            margin-bottom: 14px;
+            display: flex;
+            justify-content: center;
+        }
+        .login-logo-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #8A2BE2; /* сиреневый (как у Wildberries) — НЕ корпоративный зелёный Сбера */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+        }
+
+        .login-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 22px;
+            color: var(--text);
+        }
+
+        .login-form .form-row { text-align: left; }
+        .login-form .form-row input { max-width: 100%; }
+
+        .login-options {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 18px;
+            font-size: 14px;
+        }
+        .login-options .checkbox-row { cursor: pointer; }
+        .login-options input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+        .login-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .login-link:hover { text-decoration: underline; }
+
+        .login-submit {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+        }
+
+        .login-alt {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin: 16px 0 8px;
+            flex-wrap: wrap;
+        }
+        .alt-btn {
+            flex: 1 1 0;
+            min-width: 90px;
+            padding: 10px 8px;
+            background: #eef0f3;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text);
+            cursor: pointer;
+        }
+        .alt-btn:hover { background: #e3e6ea; }
+
+        .login-client {
+            display: inline-block;
+            margin-top: 8px;
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .login-client:hover { text-decoration: underline; }
+
+        /* Кейсы по оркестратору */
+        .orchestrator-banner {
+            background: #eef3ff;
+            border-left: 4px solid var(--accent);
+            padding: 14px 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        .orchestrator-banner code { background: var(--code-bg); padding: 1px 6px; border-radius: 4px; }
+
+        .case {
+            border: 1px solid var(--border);
+            border-left: 4px solid #0d9b7a;
+            border-radius: 10px;
+            padding: 18px 20px;
+            margin-bottom: 18px;
+        }
+        .case-title {
+            font-weight: 700;
+            font-size: 15px;
+            margin-bottom: 6px;
+        }
+        .case-scen {
+            color: var(--muted);
+            font-size: 14px;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+        .case-scen strong { color: var(--text); font-style: normal; }
+        .case-questions {
+            margin: 0 0 12px 0;
+            padding-left: 20px;
+            font-size: 14.5px;
+            line-height: 1.7;
+        }
+        .case-questions li { margin-bottom: 4px; }
+        .case textarea { margin-top: 0; }
+
+        .sber-message {
+            margin-top: 12px;
+            font-size: 14px;
+        }
+        .sber-message.ok { color: #0d9b7a; }
+        .sber-message.err { color: #e05e5e; }
+        .sber-message.hint { color: var(--muted); font-style: italic; }
+
+        footer {
+            text-align: center;
+            color: var(--muted);
+            font-size: 13px;
+            margin-top: 8px;
+        }
+
+        /* Соединение методов HTTP (drag-and-drop) */
+        .match-wrap {
+            display: flex;
+            gap: 28px;
+            margin-top: 18px;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        .match-col {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            min-width: 220px;
+            flex: 1 1 240px;
+        }
+
+        .match-method {
+            padding: 12px 16px;
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--accent);
+            border-radius: 8px;
+            background: var(--accent-soft);
+            font-family: "SF Mono", "Consolas", monospace;
+            font-weight: 700;
+            font-size: 15px;
+            transition: background 0.15s, box-shadow 0.15s;
+        }
+        .match-method.drop-hover {
+            background: #e6efff;
+            box-shadow: 0 0 0 2px var(--accent);
+        }
+        .match-method.matched {
+            border-left-color: #0d9b7a;
+            background: #eefaf5;
+        }
+        .match-method.wrong {
+            border-left-color: #e05e5e;
+            background: #fdeeee;
+        }
+
+        .match-desc {
+            padding: 12px 14px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--card);
+            font-size: 14px;
+            cursor: grab;
+            user-select: none;
+            transition: opacity 0.15s, box-shadow 0.15s, background 0.15s;
+        }
+        .match-desc[draggable="true"]:hover { border-color: var(--accent); box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        .match-desc.dragging { opacity: 0.4; }
+        .match-desc.used {
+            opacity: 0.55;
+            cursor: default;
+            background: var(--code-bg);
+        }
+        /* Открепить описание, кликнув по нему, когда оно привязано */
+        .match-desc.detach-hint { box-shadow: 0 0 0 2px #e0a800; }
+
+        .match-feedback {
+            margin-top: 16px;
+            font-size: 14px;
+            font-weight: 600;
+            min-height: 20px;
+        }
+        .match-feedback.ok { color: #0d9b7a; }
+        .match-feedback.err { color: #e05e5e; }
+        .match-feedback.hint { color: var(--muted); font-weight: 400; font-style: italic; }
+
+        @media (max-width: 600px) {
+            section { padding: 20px; }
+            .task { padding: 15px; }
+            .match-wrap { flex-direction: column; }
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js"></script>
+</head>
+<body>
+    <div class="container">
+
+        <div class="tabs" role="tablist" aria-label="Разделы заданий">
+            <button class="tab-btn active" data-tab="tab-sql" role="tab" aria-selected="true">SQL</button>
+            <button class="tab-btn" data-tab="tab-http" role="tab" aria-selected="false">HTTP</button>
+            <button class="tab-btn" data-tab="tab-bug" role="tab" aria-selected="false">Поиск багов</button>
+        </div>
+
+        <div class="tabs-hint">💡 Заполненные поля сохраняются — можно свободно переключаться между вкладками.</div>
+
+        <!-- ===================== SQL ===================== -->
+        <div class="tab-panel active" id="tab-sql" role="tabpanel">
+        <section>
+            <h2><span class="badge badge-sql">SQL</span> Запросы к базе данных</h2>
+            <p class="subtitle">Изучите схему базы данных интернет-магазина и напишите SQL-запросы для каждой задачи.</p>
+
+            <div class="engine-status" id="engine-status">⏳ Загрузка SQL-движка (sql.js)...</div>
+
+            <div class="schema">
+                <div class="schema-title">Схема базы данных интернет-магазина</div>
+
+                <div class="table">
+                    <div class="table-name">users</div>
+                    <div class="table-fields">
+                        id (INT, PK)&nbsp;&nbsp;|&nbsp;&nbsp;name (VARCHAR)&nbsp;&nbsp;|&nbsp;&nbsp;city (VARCHAR)&nbsp;&nbsp;|&nbsp;&nbsp;created_at (DATE)
+                    </div>
+                    <table class="data-table">
+                        <thead><tr><th>id</th><th>name</th><th>city</th><th>created_at</th></tr></thead>
+                        <tbody>
+                            <tr><td>1</td><td>Анна Смирнова</td><td>Москва</td><td>2026-10-05</td></tr>
+                            <tr><td>2</td><td>Пётр Иванов</td><td>Москва</td><td>2026-09-12</td></tr>
+                            <tr><td>3</td><td>Мария Кузнецова</td><td>Санкт-Петербург</td><td>2026-09-25</td></tr>
+                            <tr><td>4</td><td>Дмитрий Соколов</td><td>Казань</td><td>2026-08-15</td></tr>
+                            <tr><td>5</td><td>Ольга Попова</td><td>Москва</td><td>2026-03-01</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="table">
+                    <div class="table-name">orders</div>
+                    <div class="table-fields">
+                        id (INT, PK)&nbsp;&nbsp;|&nbsp;&nbsp;user_id (INT)&nbsp;&nbsp;|&nbsp;&nbsp;total (DECIMAL)&nbsp;&nbsp;|&nbsp;&nbsp;order_date (DATE)
+                    </div>
+                    <table class="data-table">
+                        <thead><tr><th>id</th><th>user_id</th><th>total</th><th>order_date</th></tr></thead>
+                        <tbody>
+                            <tr><td>1</td><td>1</td><td>20000</td><td>2026-10-02</td></tr>
+                            <tr><td>2</td><td>2</td><td>25000</td><td>2026-09-20</td></tr>
+                            <tr><td>3</td><td class="null">NULL</td><td>15000</td><td>2026-09-28</td></tr>
+                            <tr><td>4</td><td>3</td><td>3000</td><td>2026-09-27</td></tr>
+                            <tr><td>5</td><td>4</td><td>40000</td><td>2026-08-20</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="table">
+                    <div class="table-name">order_items</div>
+                    <div class="table-fields">
+                        id (INT, PK)&nbsp;&nbsp;|&nbsp;&nbsp;order_id (INT)&nbsp;&nbsp;|&nbsp;&nbsp;product_id (INT)&nbsp;&nbsp;|&nbsp;&nbsp;quantity (INT)
+                    </div>
+                    <table class="data-table">
+                        <thead><tr><th>id</th><th>order_id</th><th>product_id</th><th>quantity</th></tr></thead>
+                        <tbody>
+                            <tr><td>1</td><td>1</td><td>1</td><td>2</td></tr>
+                            <tr><td>2</td><td>2</td><td>2</td><td>3</td></tr>
+                            <tr><td>3</td><td>3</td><td>3</td><td>5</td></tr>
+                            <tr><td>4</td><td>4</td><td>4</td><td>1</td></tr>
+                            <tr><td>5</td><td>5</td><td>5</td><td>4</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="table">
+                    <div class="table-name">products</div>
+                    <div class="table-fields">
+                        id (INT, PK)&nbsp;&nbsp;|&nbsp;&nbsp;name (VARCHAR)&nbsp;&nbsp;|&nbsp;&nbsp;category (VARCHAR)&nbsp;&nbsp;|&nbsp;&nbsp;price (DECIMAL)
+                    </div>
+                    <table class="data-table">
+                        <thead><tr><th>id</th><th>name</th><th>category</th><th>price</th></tr></thead>
+                        <tbody>
+                            <tr><td>1</td><td>Кофе</td><td>Напитки</td><td>350</td></tr>
+                            <tr><td>2</td><td>Чай</td><td>Напитки</td><td>200</td></tr>
+                            <tr><td>3</td><td>Печенье</td><td>Снеки</td><td>150</td></tr>
+                            <tr><td>4</td><td>Кресло</td><td>Мебель</td><td>15000</td></tr>
+                            <tr><td>5</td><td>Веб-камера</td><td>Электроника</td><td>4500</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="schema-note">
+                    <strong>Примечание:</strong> в задании можно использовать любой диалект SQL; фактически запрос выполняется в SQLite.
+                    Поля, кроме <code>id</code>, могут содержать значение <code>NULL</code> — например, у заказа 3 нет покупателя,
+                    а у товара категория может быть не заполнена. Для задач принята «сегодняшняя» дата <code>14.10.2026</code>.
+                </div>
+            </div>
+
+            <!-- Выбор задачи -->
+            <div class="sql-subtabs" role="tablist" aria-label="Задачи SQL">
+                <button type="button" class="sql-subtab active" data-task="1">Задача 1 · SELECT</button>
+                <button type="button" class="sql-subtab" data-task="2">Задача 2 · JOIN</button>
+                <button type="button" class="sql-subtab" data-task="3">Задача 3 · Подзапрос</button>
+                <button type="button" class="sql-subtab" data-task="4">Задача 4 · JOIN + агрегация</button>
+                <button type="button" class="sql-subtab" data-task="5">Задача 5 · GROUP BY + HAVING</button>
+            </div>
+
+            <!-- Общие поле ввода и результат -->
+            <div class="sql-task-view">
+                <div class="task-header">
+                    <span class="task-num" id="sql-task-num">1</span>
+                    <span class="task-topic" id="sql-task-topic">SELECT + фильтрация</span>
+                </div>
+                <p class="task-text" id="sql-task-text">
+                    Выведите имена и города всех пользователей, зарегистрировавшихся за последние 30 дней (отсчёт от 14.10.2026), отсортированных по дате регистрации по убыванию.
+                </p>
+                <textarea id="sql-editor" class="sql-editor" placeholder="Напишите SQL-запрос для выбранной задачи..."></textarea>
+                <div class="check-row">
+                    <button type="button" class="check-btn" id="sql-check-btn">Проверить</button>
+                    <span class="check-result" id="sql-check-result">—</span>
+                </div>
+                <div id="sql-table"></div>
+            </div>
+        </section>
+        </div><!-- /tab-sql -->
+
+        <!-- ===================== HTTP ===================== -->
+        <div class="tab-panel" id="tab-http" role="tabpanel">
+        <section>
+            <h2><span class="badge badge-http">HTTP</span> Знание протокола HTTP</h2>
+            <p class="subtitle">Ответьте кратко на вопросы ниже.</p>
+
+            <div class="task">
+                <div class="task-header">
+                    <span class="task-num">1</span>
+                    <span class="task-topic">Методы HTTP</span>
+                </div>
+                <p>Соедините метод HTTP (слева) с его правильным назначением (справа). Перетащите карточку описания на соответствующий метод.</p>
+
+                <div class="match-wrap">
+                    <div class="match-col match-methods" id="match-methods">
+                        <div class="match-method" data-method="GET">GET</div>
+                        <div class="match-method" data-method="POST">POST</div>
+                        <div class="match-method" data-method="PUT">PUT</div>
+                        <div class="match-method" data-method="DELETE">DELETE</div>
+                        <div class="match-method" data-method="PATCH">PATCH</div>
+                    </div>
+
+                    <div class="match-col match-descs" id="match-descs">
+                        <div class="match-desc" draggable="true" data-desc="3">Полностью заменяет существующий ресурс</div>
+                        <div class="match-desc" draggable="true" data-desc="1">Запрашивает данные с сервера без изменения состояния</div>
+                        <div class="match-desc" draggable="true" data-desc="5">Частично изменяет существующий ресурс</div>
+                        <div class="match-desc" draggable="true" data-desc="2">Создаёт новый ресурс на сервере</div>
+                        <div class="match-desc" draggable="true" data-desc="4">Удаляет указанный ресурс</div>
+                    </div>
+                </div>
+
+                <div class="match-feedback" id="match-feedback" role="status"></div>
+            </div>
+
+            <div class="task">
+                <div class="task-header">
+                    <span class="task-num">2</span>
+                    <span class="task-topic">Коды ответа</span>
+                </div>
+                <p>Напишите значение следующих HTTP-кодов по одному слову/фразе в строке (например: 200 — OK): 200, 201, 204, 301, 400, 401, 403, 404, 429, 500.</p>
+                <textarea name="http-2" placeholder="200 — ...&#10;201 — ...&#10;..." class="http-answer"></textarea>
+            </div>
+
+            <div class="task">
+                <div class="task-header">
+                    <span class="task-num">3</span>
+                    <span class="task-topic">Кейс</span>
+                </div>
+                <p>При тестировании формы логина сервер на неверный пароль возвращает код 200. Является ли это багом? Обоснуйте ответ и укажите, какой код был бы корректнее.</p>
+                <textarea name="http-3" placeholder="Ваш ответ..."></textarea>
+            </div>
+        </section>
+        </div><!-- /tab-http -->
+
+        <!-- ===================== ПОИСК БАГОВ ===================== -->
+        <div class="tab-panel" id="tab-bug" role="tabpanel">
+        <section>
+            <h2><span class="badge badge-bug">Баг-репорт</span> Поиск багов в форме</h2>
+            <p class="subtitle">
+                Ниже — форма входа в личный кабинет. В ней намеренно допущены ошибки (как видимые визуально, так и логические в поведении).
+                Проверьте форму и перечислите найденные баги в поле под ней.
+            </p>
+
+            <form id="buggy-form" class="bug-form login-form" novalidate>
+                <div class="bug-banner">
+                    🐞 Это тестовая форма с намеренными багами. Попробуйте с ней поработать: заполните, отправьте, проверьте валидацию.
+                </div>
+
+                <div class="login-logo" aria-label="Логотип Сбера" title="Логотип Сбера">
+                    <span class="login-logo-circle">
+                        <svg viewBox="0 0 24 24" width="34" height="34" aria-hidden="true">
+                            <path d="M4 12.5 L10 18.5 L20 6" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </span>
+                </div>
+                <div class="login-title">Вход в СберБизнес</div>
+
+                <div class="form-row">
+                    <label for="f-login">Логин</label>
+                    <input type="text" id="f-login" placeholder="Логин">
+                </div>
+
+                <div class="form-row">
+                    <label for="f-password">Пароль</label>
+                    <!-- баг: задан minlength, но сообщение о слишком коротком пароле не отображается -->
+                    <input type="password" id="f-password" minlength="8" placeholder="Пароль">
+                </div>
+
+                <div class="login-options">
+                    <!-- баг: чекбокс не кликабелен — невозможно снять галочку -->
+                    <label class="checkbox-row" id="remember-label">
+                        <input type="checkbox" id="f-remember" checked>
+                        <span>Запомнить меня</span>
+                    </label>
+                    <a href="#" class="login-link" onclick="return false;">Восстановить доступ</a>
+                </div>
+
+                <button type="submit" id="submit-btn" class="btn login-submit">Войти</button>
+
+                <div class="login-alt">
+                    <button type="button" class="alt-btn">УКЭП</button>
+                    <button type="button" class="alt-btn">Биометрия</button>
+                    <button type="button" class="alt-btn">Ещё ▾</button>
+                </div>
+
+                <a href="#" class="login-client" onclick="return false;">Стать клиентом</a>
+            </form>
+
+            <div id="sber-message" class="sber-message" style="display:none;"></div>
+
+            <h3>Найденные баги</h3>
+            <textarea name="bugs-found" placeholder="Перечислите баги, которые вы нашли. Для каждого укажите: шаги воспроизведения, ожидаемый результат, фактический результат."></textarea>
+        </section>
+
+        <section>
+            <h2><span class="badge badge-bug">Кейсы</span> Тестирование оркестратора ИИ-агентов</h2>
+            <p class="subtitle">
+                Изучите схему и ответьте на вопросы к каждому кейсу. Вы — тестировщик качества интеграций.
+            </p>
+
+            <div class="orchestrator-banner">
+                <strong>Схема:</strong> Платформа → API-шлюз → <strong>Оркестратор</strong> (выбирает агента по маршрутизации, балансировке, приоритету, нагрузке) → ИИ-агент (HTTP) → ответ → пользователю.
+                Параллельно оркестратор пишет события обмена в <code>Kafka</code> (логирование, аналитика).<br>
+                Отвечайте кратко, по делу.
+            </div>
+
+            <div class="case">
+                <div class="case-title">Кейс 1 · Недоступный агент (отказоустойчивость)</div>
+                <div class="case-scen"><strong>Сценарий:</strong> Пользователь отправил запрос, оркестратор выбрал агента, но тот в момент вызова недоступен (500 / таймаут / сеть).</div>
+                <ol class="case-questions">
+                    <li>Какие кейсы ошибок вы проверите и в какой очерёдности?</li>
+                    <li>Что должен вернуть оркестратор пользователю, если агент упал? Что здесь «правильно» с точки зрения UX?</li>
+                    <li>Есть ли риск двойной обработки при ретрае? Как это проверить?</li>
+                    <li>Как убедиться, что пользователю вернулся именно ответ агента, а не подменённое сообщение (сквозная проверка)?</li>
+                </ol>
+                <textarea name="case-1" placeholder="Ваш ответ..."></textarea>
+            </div>
+
+            <div class="case">
+                <div class="case-title">Кейс 2 · Сквозной трейсинг и контракт</div>
+                <div class="case-scen"><strong>Сценарий:</strong> Жалоба: «иногда пользователь получает ответ не от того агента». Нужно понять, где теряется контекст.</div>
+                <ol class="case-questions">
+                    <li>Какие идентификаторы (requestId, traceId, correlationId, атрибуты сессии) должны проходить через всю цепочку Платформа→Оркестратор→Агент→ответ?</li>
+                    <li>В каких точках схемы эти идентификаторы могут потеряться или подмениться?</li>
+                    <li>Как проверить, что ответ агента сопоставлен с запросом именно этого пользователя, а событие в Kafka согласовано с фактическим обменом?</li>
+                    <li>Как убедиться, что контракт между оркестратором и агентом соблюдён (поля, типы, коды ошибок)? Что делать при расхождении?</li>
+                </ol>
+                <textarea name="case-2" placeholder="Ваш ответ..."></textarea>
+            </div>
+
+            <div class="case">
+                <div class="case-title">Кейс 3 · Выбор агента (маршрутизация)</div>
+                <div class="case-scen"><strong>Сценарий:</strong> Оркестратор выбирает агента по правилу (язык/домен/тип вопроса); при отсутствии подходящего — fallback-агент.</div>
+                <ol class="case-questions">
+                    <li>Какие кейсы маршрутизации вы прогоните (агент найден / не найден / несколько подходят / конфликт приоритетов)?</li>
+                    <li>Что должен сделать оркестратор при неоднозначном выборе и как это проверить?</li>
+                    <li>Как проверить, что для одинакового входа дважды выбран один и тот же агент (детерминированность)? А если поведение недетерминировано — как найти причину различия?</li>
+                    <li>Что если fallback-агент тоже недоступен? Как поведёт себя система и где это должно быть зафиксировано в контракте?</li>
+                </ol>
+                <textarea name="case-3" placeholder="Ваш ответ..."></textarea>
+            </div>
+
+            <div class="case">
+                <div class="case-title">Кейс 4 · Согласованность через Kafka (гарантии доставки)</div>
+                <div class="case-scen"><strong>Сценарий:</strong> Оркестратор публикует в Kafka событие о каждом обмене. Аналитики: «событий то больше, то меньше, чем реальных запросов».</div>
+                <ol class="case-questions">
+                    <li>Какие причины предположите первыми (дубль / потеря / событие до или после реального ответа / нарушение порядка)?</li>
+                    <li>Как проверить, что каждому реальному HTTP-обмену соответствует ровно одно событие в Kafka (at-least-once / exactly-once)?</li>
+                    <li>Как проверить порядок событий (если он важен) при параллельных партициях?</li>
+                    <li>Опишите проверку идемпотентности потребителя: если событие продублировалось, не будет ли двойного учёта?</li>
+                </ol>
+                <textarea name="case-4" placeholder="Ваш ответ..."></textarea>
+            </div>
+
+            <div class="case">
+                <div class="case-title">Кейс 5 · Таймауты, ретраи, деградация</div>
+                <div class="case-scen"><strong>Сценарий:</strong> В пик нагрузки ответ пользователю приходит слишком долго либо теряется.</div>
+                <ol class="case-questions">
+                    <li>Какие таймауты (клиент / сеть / агент) и в каком порядке вы проверите?</li>
+                    <li>При ретрае агент мог уже обработать запрос — как не допустить двойного ответа/дубля и как это протестировать?</li>
+                    <li>Как система должна деградировать (fallback / кэш прошлого ответа / вежливый отказ) и как проверить каждый сценарий?</li>
+                    <li>Как проверить, что при перегрузке пользователь получает понятный отказ, а не зависший клиент?</li>
+                </ol>
+                <textarea name="case-5" placeholder="Ваш ответ..."></textarea>
+            </div>
+        </section>
+        </div><!-- /tab-bug -->
+
+        <footer>Тестовое задание для кандидатов · Бизнес Помощник</footer>
+    </div>
+
+    <script>
+        (function () {
+            "use strict";
+
+            // ===== Переключение вкладок =====
+            var tabButtons = document.querySelectorAll(".tab-btn");
+
+            function activateTab(tabId) {
+                tabButtons.forEach(function (btn) {
+                    var on = btn.getAttribute("data-tab") === tabId;
+                    btn.classList.toggle("active", on);
+                    btn.setAttribute("aria-selected", on ? "true" : "false");
+                });
+
+                document.querySelectorAll(".tab-panel").forEach(function (panel) {
+                    var on = panel.id === tabId;
+                    panel.classList.toggle("active", on);
+                });
+            }
+
+            tabButtons.forEach(function (btn) {
+                btn.addEventListener("click", function () {
+                    activateTab(btn.getAttribute("data-tab"));
+                });
+            });
+
+            // ===== SQL: движок sql.js и проверка заданий =====
+            var engineStatus = document.getElementById("engine-status");
+            var db = null;
+            var sqlReady = false;
+            var sqlInitError = null;
+
+            // Схема и данные базы интернет-магазина
+            var SCHEMA_SQL = [
+                "CREATE TABLE users (id INTEGER PRIMARY KEY, name TEXT, city TEXT, created_at TEXT);",
+                "CREATE TABLE orders (id INTEGER PRIMARY KEY, user_id INTEGER, total REAL, order_date TEXT);",
+                "CREATE TABLE products (id INTEGER PRIMARY KEY, name TEXT, category TEXT, price REAL);",
+                "CREATE TABLE order_items (id INTEGER PRIMARY KEY, order_id INTEGER, product_id INTEGER, quantity INTEGER);",
+                "INSERT INTO users VALUES (1,'Анна Смирнова','Москва','2026-10-05'),(2,'Пётр Иванов','Москва','2026-09-12'),(3,'Мария Кузнецова','Санкт-Петербург','2026-09-25'),(4,'Дмитрий Соколов','Казань','2026-08-15'),(5,'Ольга Попова','Москва','2026-03-01');",
+                "INSERT INTO orders VALUES (1,1,20000,'2026-10-02'),(2,2,25000,'2026-09-20'),(3,NULL,15000,'2026-09-28'),(4,3,3000,'2026-09-27'),(5,4,40000,'2026-08-20');",
+                "INSERT INTO products VALUES (1,'Кофе','Напитки',350),(2,'Чай','Напитки',200),(3,'Печенье','Снеки',150),(4,'Кресло','Мебель',15000),(5,'Веб-камера','Электроника',4500);",
+                "INSERT INTO order_items VALUES (1,1,1,2),(2,2,2,3),(3,3,3,5),(4,4,4,1),(5,5,5,4);"
+            ].join("\n");
+
+            function initSql() {
+                if (sqlReady || sqlInitError) return;
+                if (typeof window.initSqlJs !== "function") {
+                    sqlInitError = "Не удалось загрузить sql.js (библиотека не найдена).";
+                    engineStatus.textContent = "❌ " + sqlInitError;
+                    return;
+                }
+                try {
+                    window.initSqlJs({
+                        locateFile: function (file) {
+                            return "https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/" + file;
+                        }
+                    }).then(function (SQL) {
+                        db = new SQL.Database();
+                        db.run(SCHEMA_SQL);
+                        sqlReady = true;
+                        engineStatus.innerHTML = "✅ Движок SQL загружен. Нажмите «Проверить» после ввода запроса.";
+                    }).catch(function (e) {
+                        sqlInitError = String(e && e.message ? e.message : e);
+                        engineStatus.textContent = "❌ Ошибка загрузки sql.js: " + sqlInitError;
+                    });
+                } catch (e) {
+                    sqlInitError = String(e && e.message ? e.message : e);
+                    engineStatus.textContent = "❌ Ошибка инициализации: " + sqlInitError;
+                }
+            }
+
+            // Собрать строки результата запроса
+            function runSelect(sqlText) {
+                var res = db.exec(sqlText);
+                if (!res || res.length === 0) return { columns: [], rows: [] };
+                var q = res[res.length - 1];
+                if (!q.values) return { columns: q.columns || [], rows: [] };
+                return { columns: q.columns, rows: q.values };
+            }
+
+            // Отрисовать результат SELECT как HTML-таблицу
+            function renderResult(tableWrap, columns, rows) {
+                if (columns.length === 0) {
+                    tableWrap.innerHTML = "";
+                    return;
+                }
+                var html = "<div class='qr-table-wrap'><table class='qr-table'><thead><tr>";
+                columns.forEach(function (c) { html += "<th>" + escapeHtml(String(c)) + "</th>"; });
+                html += "</tr></thead><tbody>";
+                if (rows.length === 0) {
+                    html += "<tr><td colspan='" + columns.length + "' class='qr-empty'>Нет строк</td></tr>";
+                } else {
+                    rows.forEach(function (row) {
+                        html += "<tr>";
+                        row.forEach(function (v) {
+                            if (v === null || v === undefined) {
+                                html += "<td class='null'>NULL</td>";
+                            } else {
+                                html += "<td>" + escapeHtml(String(v)) + "</td>";
+                            }
+                        });
+                        html += "</tr>";
+                    });
+                }
+                html += "</tbody></table></div>";
+                tableWrap.innerHTML = html;
+            }
+
+            function escapeHtml(s) {
+                return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+            }
+
+            function checkTask() {
+                var ta = document.getElementById("sql-editor");
+                var resultEl = document.getElementById("sql-check-result");
+                var tableWrap = document.getElementById("sql-table");
+
+                if (!sqlReady) {
+                    initSql();
+                    resultEl.textContent = "SQL-движок ещё не готов, попробуйте ещё раз.";
+                    resultEl.className = "check-result pending";
+                    return;
+                }
+
+                var raw = ta.value.trim();
+                if (!raw) {
+                    resultEl.textContent = "Введите запрос.";
+                    resultEl.className = "check-result err";
+                    tableWrap.innerHTML = "";
+                    return;
+                }
+
+                // Разрешаем один завершающий символ ;
+                var q = raw;
+                if (q.charAt(q.length - 1) === ";") q = q.slice(0, -1).trim();
+                if (q.indexOf(";") !== -1 || q.toLowerCase().indexOf("--") !== -1) {
+                    resultEl.textContent = "Пожалуйста, введите один SELECT-запрос.";
+                    resultEl.className = "check-result err";
+                    tableWrap.innerHTML = "";
+                    return;
+                }
+                if (!/^\s*SELECT/i.test(q)) {
+                    resultEl.textContent = "Разрешены только SELECT-запросы.";
+                    resultEl.className = "check-result err";
+                    tableWrap.innerHTML = "";
+                    return;
+                }
+
+                tableWrap.innerHTML = "";
+
+                var cand;
+                try {
+                    cand = runSelect(q);
+                } catch (e) {
+                    resultEl.textContent = "Ошибка в запросе: " + (e.message || e);
+                    resultEl.className = "check-result err";
+                    tableWrap.innerHTML = "";
+                    return;
+                }
+
+                if (cand.columns.length === 0) {
+                    resultEl.textContent = "Запрос не вернул результат (SELECT ничего не вернул).";
+                    resultEl.className = "check-result err";
+                    return;
+                }
+
+                resultEl.textContent = "✅ Запрос выполнен успешно.";
+                resultEl.className = "check-result ok";
+                renderResult(tableWrap, cand.columns, cand.rows);
+            }
+
+            // Задачи (текст и тема для каждой) — подставляются при переключении мини-вкладок
+            var SQL_TASKS = {
+                1: { topic: "SELECT + фильтрация", text: "Выведите имена и города всех пользователей, зарегистрировавшихся за последние 30 дней (отсчёт от 14.10.2026), отсортированных по дате регистрации по убыванию." },
+                2: { topic: "JOIN", text: "Выведите список заказов с именем покупателя и городом. Включите информацию о каждом заказе, даже если у заказа нет покупателя." },
+                3: { topic: "Вложенный запрос", text: "Выведите имена пользователей, у которых есть хотя бы один заказ на сумму больше 5000 (используйте подзапрос)." },
+                4: { topic: "JOIN + агрегация", text: "Для каждого товара посчитайте общее количество проданных единиц (сумму quantity по всем заказам)." },
+                5: { topic: "GROUP BY + HAVING", text: "Выведите города, в которых суммарная выручка (сумма total по всем заказам) превышает 30 000, и эту суммарную выручку." }
+            };
+            var currentSqlTask = "1";
+
+            function setSqlTask(taskId) {
+                currentSqlTask = taskId;
+                document.querySelectorAll(".sql-subtab").forEach(function (btn) {
+                    var on = btn.getAttribute("data-task") === taskId;
+                    btn.classList.toggle("active", on);
+                });
+                var task = SQL_TASKS[taskId];
+                document.getElementById("sql-task-num").textContent = taskId;
+                document.getElementById("sql-task-topic").textContent = task.topic;
+                document.getElementById("sql-task-text").textContent = task.text;
+            }
+
+            document.querySelectorAll(".sql-subtab").forEach(function (btn) {
+                btn.addEventListener("click", function () {
+                    setSqlTask(btn.getAttribute("data-task"));
+                });
+            });
+
+            var sqlCheckBtn = document.getElementById("sql-check-btn");
+            if (sqlCheckBtn) {
+                sqlCheckBtn.addEventListener("click", checkTask);
+            }
+
+            initSql();
+
+            // ===== HTTP: соединение методов (drag-and-drop) =====
+            // Правильные соответствия: метод -> data-desc описания
+            var METHOD_MATCH = {
+                "GET": "1",
+                "POST": "2",
+                "PUT": "3",
+                "DELETE": "4",
+                "PATCH": "5"
+            };
+
+            var matchFeedback = document.getElementById("match-feedback");
+            var matchPlacements = {}; // data-desc -> метод
+            var matchEls = {
+                desc: document.getElementById("match-descs").querySelectorAll(".match-desc"),
+                method: document.getElementById("match-methods").querySelectorAll(".match-method")
+            };
+            var draggedDesc = null; // элемент с data-desc, который перетаскиваем
+
+            [].forEach.call(matchEls.desc, function (desc) {
+                desc.setAttribute("draggable", "true");
+
+                desc.addEventListener("dragstart", function (e) {
+                    draggedDesc = desc;
+                    desc.classList.add("dragging");
+                    e.dataTransfer.effectAllowed = "move";
+                    try { e.dataTransfer.setData("text/plain", desc.getAttribute("data-desc")); } catch (err) {}
+                });
+
+                desc.addEventListener("dragend", function () {
+                    desc.classList.remove("dragging");
+                    draggedDesc = null;
+                    [].forEach.call(matchEls.method, function (m) { m.classList.remove("drop-hover"); });
+                });
+            });
+
+            [].forEach.call(matchEls.method, function (method) {
+                method.addEventListener("dragover", function (e) {
+                    e.preventDefault();
+                    if (draggedDesc && !method.contains(draggedDesc)) {
+                        method.classList.add("drop-hover");
+                    }
+                });
+                method.addEventListener("dragleave", function () {
+                    method.classList.remove("drop-hover");
+                });
+                method.addEventListener("drop", function (e) {
+                    e.preventDefault();
+                    method.classList.remove("drop-hover");
+                    if (!draggedDesc) return;
+
+                    var desc = draggedDesc;
+                    var descKey = desc.getAttribute("data-desc");
+
+                    // Если метод уже занят другим описанием — освобождаем его
+                    var prevDescKey = Object.keys(matchPlacements).find(function (k) { return matchPlacements[k] === method.getAttribute("data-method"); });
+                    if (prevDescKey && prevDescKey !== descKey) {
+                        placeDesc(prevDescKey, null);
+                    }
+
+                    placeDesc(descKey, method.getAttribute("data-method"));
+                    evaluateMatch();
+                });
+            });
+
+            function placeDesc(descKey, methodName) {
+                var descEl = null;
+                [].forEach.call(matchEls.desc, function (d) {
+                    if (d.getAttribute("data-desc") === descKey) descEl = d;
+                });
+                if (!descEl) return;
+
+                if (methodName) {
+                    matchPlacements[descKey] = methodName;
+                } else {
+                    delete matchPlacements[descKey];
+                }
+
+                // Обновляем состояние метод-элементов
+                [].forEach.call(matchEls.method, function (m) {
+                    var isMatched = Object.keys(matchPlacements).some(function (k) { return matchPlacements[k] === m.getAttribute("data-method"); });
+                    m.classList.toggle("matched", isMatched);
+                    m.classList.remove("wrong");
+                });
+
+                // Обновляем визуал описаний
+                descEl.classList.toggle("used", !!methodName);
+            }
+
+            // Проверка завершённости/правильности + сообщение
+            function evaluateMatch() {
+                var total = Object.keys(matchPlacements).length;
+                if (total === 0) { matchFeedback.className = "match-feedback hint"; matchFeedback.textContent = "Перетащите описания к методам."; return; }
+
+                if (total < 5) {
+                    matchFeedback.className = "match-feedback hint";
+                    matchFeedback.textContent = "Соединено " + total + " из 5. Продолжайте.";
+                    styleWrong();
+                    return;
+                }
+
+                // правильная проверка по ключам
+                var ok = true;
+                Object.keys(METHOD_MATCH).forEach(function (m) {
+                    var expected = METHOD_MATCH[m];
+                    var actual = Object.keys(matchPlacements).find(function (k) { return matchPlacements[k] === m; });
+                    if (actual !== expected) ok = false;
+                });
+
+                styleWrong();
+
+                if (ok) {
+                    matchFeedback.className = "match-feedback ok";
+                    matchFeedback.textContent = "✅ Всё верно! Все методы соединены правильно.";
+                } else {
+                    matchFeedback.className = "match-feedback err";
+                    matchFeedback.textContent = "Есть ошибки: неправильные соединения подсвечены красным. Исправьте их.";
+                }
+            }
+
+            // Подсветить неверно привязанные описания
+            function styleWrong() {
+                [].forEach.call(matchEls.method, function (m) {
+                    var methodName = m.getAttribute("data-method");
+                    var assigned = Object.keys(matchPlacements).find(function (k) { return matchPlacements[k] === methodName; });
+                    var expected = METHOD_MATCH[methodName];
+                    var isWrong = assigned && assigned !== expected;
+                    m.classList.toggle("wrong", isWrong);
+                });
+            }
+
+            // ===== Форма входа с намеренными багами =====
+            var form = document.getElementById("buggy-form");
+            var loginEl = document.getElementById("f-login");
+            var passEl = document.getElementById("f-password");
+            var rememberEl = document.getElementById("f-remember");
+            var msg = document.getElementById("sber-message");
+
+            // БАГ: чекбокс «Запомнить меня» отмечен по умолчанию, но не кликабелен —
+            // снять галочку невозможно (клик игнорируется).
+            if (rememberEl) {
+                rememberEl.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    rememberEl.checked = true; // всегда стоит галочка
+                });
+                rememberEl.addEventListener("change", function () {
+                    rememberEl.checked = true;
+                });
+            }
+
+            // БАГ: поле «Логин» вообще не участвует в валидации — можно «войти» с пустым логином.
+            function validate() {
+                // БАГ: пароль должен быть не короче 8 символов, но сообщение об ошибке
+                // не подсказывает, что именно не так.
+                var passOk = passEl.value.length >= 8;
+                return passOk;
+            }
+
+            form.addEventListener("submit", function (event) {
+                event.preventDefault();
+
+                // БАГ: чекбокс «Запомнить меня» не управляется, состояние не передаётся.
+                // БАГ: логин может быть пустым — ошибка не показывается.
+                if (validate()) {
+                    showMessage("Вход выполнен успешно. Добро пожаловать!", "ok");
+                } else {
+                    // БАГ: не подсвечивается конкретное поле с ошибкой,
+                    // общее сообщение не подсказывает, что именно не так.
+                    showMessage("Ошибка: проверьте правильность ввода.", "err");
+                }
+            });
+
+            function showMessage(text, cls) {
+                msg.textContent = text;
+                msg.className = "sber-message " + cls;
+                msg.style.display = "block";
+            }
+
+            // БАГ: на blur у пароля класс error снимается всегда и никогда не ставится
+            // при коротком пароле — индикация работает "в холостую".
+            passEl.addEventListener("blur", function () {
+                var row = passEl.closest(".form-row");
+                row.classList.remove("error");
+            });
+
+            // БАГ: форма визуально выглядит готовой, но кнопка не блокируется при невалидных данных —
+            // признак отсутствия валидации на уровне submit.
+        })();
+    </script>
+</body>
+</html>
